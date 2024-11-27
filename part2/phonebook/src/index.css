@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.alert {
+  padding: 20px;
+  background-color: lightgray;
+  font-size: 1.2rem;
+  border: 2px solid black;
+  margin: 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.alert.success {
+  color: #04aa6d;
+  border-color: #04aa6d;
+}
+.alert.error {
+  color: #ff3700;
+  border-color: #ff3700;
+}
