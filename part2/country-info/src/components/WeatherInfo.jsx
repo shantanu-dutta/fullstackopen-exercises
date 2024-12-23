@@ -1,10 +1,10 @@
 import weatherService from "../services/weather";
 
-const WeatherInfo = ({ weatherData }) => {
+const WeatherInfo = ({ placeName, weatherData }) => {
   const weather = weatherData.weather[0];
   return (
     <>
-      <h2>Weather</h2>
+      <h2>Weather in {placeName}</h2>
       <p>
         <strong>Temperature:</strong> {weatherData.main.temp} °C
       </p>
