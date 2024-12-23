@@ -1,0 +1,36 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.search {
+  padding: 1rem;
+}
+
+.results {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.results .matches {
+  min-width: 20rem;
+}
+
+.results .selected {
+  background-color: red;
+  padding: 4px;
+  font-weight: bold;
+}
