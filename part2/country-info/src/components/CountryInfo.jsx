@@ -10,10 +10,16 @@ const CountryInfo = ({ country }) => {
     if (!country) {
       return;
     }
-    weatherService.getForLocation(country.latlng).then((response) => {
-      setWeatherData(response);
-    });
+    weatherService
+      .getForLocation(country.capitalInfo.latlng)
+      .then((response) => {
+        setWeatherData(response);
+      });
   }, [country]);
+
+  if (!weatherData) {
+    return null;
+  }
 
   return (
     <div className="country">
@@ -36,7 +42,7 @@ const CountryInfo = ({ country }) => {
         alt={country.flags.alt}
         className="country-flag"
       />
-      {weatherData && <WeatherInfo weatherData={weatherData} />}
+      <WeatherInfo placeName={country.capital[0]} weatherData={weatherData} />
     </div>
   );
 };
