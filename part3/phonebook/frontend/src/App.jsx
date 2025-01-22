@@ -70,9 +70,8 @@ const App = () => {
           }, 5000);
         })
         .catch((error) => {
-          setErrorMessage(
-            `Information on ${newPersonObj.name} has already been removed from the server.`
-          );
+          console.error(error.response.data.error);
+          setErrorMessage(error.response.data.error);
           setTimeout(() => {
             setErrorMessage(null);
           }, 5000);
@@ -93,6 +92,12 @@ const App = () => {
       setSuccessMessage(`Successfully added ${returnedPerson.name}.`);
       setTimeout(() => {
         setSuccessMessage(null);
+      }, 5000);
+    }).catch(error => {
+      console.error(error.response.data.error);
+      setErrorMessage(error.response.data.error);
+      setTimeout(() => {
+        setErrorMessage(null);
       }, 5000);
     });
   }
@@ -116,8 +121,8 @@ const App = () => {
 
   const filteredPersons = searchTerm
     ? persons.filter((person) =>
-        person.name.toLocaleLowerCase().includes(searchTerm)
-      )
+      person.name.toLocaleLowerCase().includes(searchTerm)
+    )
     : persons;
 
   return (
