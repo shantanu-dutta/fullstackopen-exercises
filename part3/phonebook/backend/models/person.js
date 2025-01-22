@@ -1,19 +1,19 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
-const url = process.env.MONGODB_URI;
+const url = process.env.MONGODB_URI
 
-console.log("Connecting to DB");
+console.log('Connecting to DB')
 
-mongoose.set("strictQuery", false);
+mongoose.set('strictQuery', false)
 
 mongoose
   .connect(url)
   .then(() => {
-    console.log("Connected to DB");
+    console.log('Connected to DB')
   })
   .catch((error) => {
-    console.log(`Error connecting to DB: ${error.message}`);
-  });
+    console.log(`Error connecting to DB: ${error.message}`)
+  })
 
 const personSchema = new mongoose.Schema({
   name: {
@@ -30,14 +30,14 @@ const personSchema = new mongoose.Schema({
       message: props => `${props.value} is not a valid phone number!`
     }
   },
-});
+})
 
-personSchema.set("toJSON", {
+personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   },
-});
+})
 
-export default new mongoose.model("Person", personSchema);
+export default new mongoose.model('Person', personSchema)
