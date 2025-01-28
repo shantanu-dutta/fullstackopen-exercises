@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "node --test",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "test:watch": "node --test --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -23,8 +23,10 @@
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
     "lodash": "^4.17.21",
     "mongoose": "^8.9.5",
     "morgan": "^1.10.0"
@@ -32,9 +34,11 @@
   "devDependencies": {
     "@eslint/js": "^9.18.0",
     "@stylistic/eslint-plugin-js": "^2.13.0",
+    "@types/supertest": "^6.0.2",
     "eslint": "^9.18.0",
     "globals": "^15.14.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
   },
   "engines": {
     "node": "^22.13.1"
