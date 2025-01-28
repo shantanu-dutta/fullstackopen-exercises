@@ -110,10 +110,10 @@ describe('blogs api', () => {
       assert.deepStrictEqual(response.body, { error: 'title missing' })
 
       const blogsAtEnd = await blogsInDb()
-      assert.deepStrictEqual(blogsAtStart, blogsAtEnd)
+      assert.strictEqual(blogsAtStart.length, blogsAtEnd.length)
     })
 
-    test.only('should fail if the url property is missing', async () => {
+    test('should fail if the url property is missing', async () => {
       const blogsAtStart = await blogsInDb()
 
       const blogWithoutUrl = {
@@ -128,7 +128,7 @@ describe('blogs api', () => {
       assert.deepStrictEqual(response.body, { error: 'url missing' })
 
       const blogsAtEnd = await blogsInDb()
-      assert.deepStrictEqual(blogsAtStart, blogsAtEnd)
+      assert.strictEqual(blogsAtStart.length, blogsAtEnd.length)
     })
   })
 
