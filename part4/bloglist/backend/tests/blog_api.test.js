@@ -9,13 +9,9 @@ import Blog from '../models/blog.js'
 
 import { blogsInDb, initialBlogs } from './test_helpers.js'
 
-describe('blogs api', () => {
+describe('Blogs API', () => {
 
-  let api
-
-  beforeEach(() => {
-    api = supertest(app)
-  })
+  let api = supertest(app)
 
   beforeEach(async () => {
     await Blog.deleteMany({})
@@ -129,6 +125,43 @@ describe('blogs api', () => {
 
       const blogsAtEnd = await blogsInDb()
       assert.strictEqual(blogsAtStart.length, blogsAtEnd.length)
+    })
+  })
+
+  describe('deleting blog', () => {
+
+    test('should delete an existing blog', async () => {
+      const blogsAtStart = await blogsInDb()
+
+      const blogToDelete = blogsAtStart[0]
+
+      await api
+        .delete(`/api/blogs/${blogToDelete.id}`)
+        .expect(204)
+
+      const blogsAtEnd = await blogsInDb()
+      assert.strictEqual(blogsAtEnd.length, blogsAtStart.length - 1)
+
+      const contents = blogsAtEnd.map(blog => blog.title)
+      assert(!contents.includes(blogToDelete.title))
+    })
+  })
+
+  describe('updating blog', () => {
+
+    test('should update blog likes', async () => {
+      const blogsAtStart = await blogsInDb()
+
+      const blogToUpdate = blogsAtStart[0]
+      blogToUpdate.likes++
+
+      const response = await api
+        .put(`/api/blogs/${blogToUpdate.id}`)
+        .send(blogToUpdate)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+      assert.strictEqual(response.body.likes, blogToUpdate.likes)
     })
   })
 
